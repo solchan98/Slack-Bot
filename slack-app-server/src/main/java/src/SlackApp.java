@@ -3,16 +3,28 @@ package src;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
-import src.router.Message;
+import src.router.BlockActionRouter;
+import src.router.MessageRouter;
+import src.router.Router;
+import src.router.ViewSubmissionRouter;
+
+import java.util.List;
 
 public class SlackApp {
 
     private static final App app;
     private static final SlackAppServer slackAppServer;
     private static final SlackApp INSTANCE = new SlackApp();
+
+    private static final List<Router> routerList = List.of(
+            MessageRouter.getInstance(),
+            BlockActionRouter.getInstance(),
+            ViewSubmissionRouter.getInstance());
+
     // todo env
     private static final String SINGLE_TOKEN = "";
     private static final String OAUTH_TOKEN = "";
+    private SlackApp() {}
 
     static {
         AppConfig appConfig = AppConfig.builder().singleTeamBotToken(OAUTH_TOKEN).signingSecret(SINGLE_TOKEN).build();
@@ -20,11 +32,10 @@ public class SlackApp {
         slackAppServer = new SlackAppServer(app);
     }
 
+    // init routers
     static {
-        Message.setAppMessageRouter(app);
+        routerList.forEach(router -> router.setAppRouter(app));
     }
-
-    private SlackApp() {}
 
     public static SlackApp getInstance() {
         return INSTANCE;
