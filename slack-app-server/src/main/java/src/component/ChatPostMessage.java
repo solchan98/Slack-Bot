@@ -8,6 +8,8 @@ import java.util.List;
 
 public class ChatPostMessage {
 
+    private ChatPostMessage() {}
+
     public static ChatPostMessageRequest getSayHello(String channel, String username) {
         return ChatPostMessageRequest.builder()
                 .channel(channel) // 채널 ID가 아닌 유저ID로 설정하면 봇이 개인 DM으로 보냄
