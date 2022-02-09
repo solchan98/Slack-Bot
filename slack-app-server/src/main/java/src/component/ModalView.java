@@ -6,41 +6,41 @@ import static com.slack.api.model.block.Blocks.*;
 import static com.slack.api.model.block.composition.BlockCompositions.*;
 import static com.slack.api.model.block.element.BlockElements.*;
 import static com.slack.api.model.view.Views.*;
+import static src.common.IdList.*;
 
 public class ModalView {
     private ModalView() {}
     private static final String MODAL_TYPE = "modal";
-    private static final String CALL_BACK_ADD_TODO = "callback_add_todo";
     private static final String PLAIN_TEXT = "plain_text";
 
     public static final View ADD_TODO = view(v -> v
                 .type(MODAL_TYPE)
-                .callbackId(CALL_BACK_ADD_TODO)
+                .callbackId(ADD_TODO_CALLBACK_ID)
                 .title(viewTitle(vt -> vt.type(PLAIN_TEXT).text("할일 매니저")))
                 .blocks(asBlocks(
                         section(s -> s.text(markdownText(mt -> mt.text("할일과 알림받을 시간을 설정하세요.")))),
                         input(i -> {
-                            i.blockId("add_todo_text");
+                            i.blockId(ADD_TODO_TEXT_BLOCK);
                             i.label(plainText(t -> t.text("할일")));
-                            i.element(plainTextInput(ti -> ti.actionId("todo_value")));
+                            i.element(plainTextInput(ti -> ti.actionId(ADD_TODO_TEXT_VALUE)));
                             return i;
                         }),
                         input(i -> {
-                            i.blockId("add_todo_date");
+                            i.blockId(ADD_TODO_DATE_BLOCK);
                             i.label(plainText(t -> t.text("날짜")));
                             i.element(datePicker(dp -> {
                                 dp.placeholder(plainText(t -> t.text("Select a date")));
-                                dp.actionId("date_value");
+                                dp.actionId(ADD_TODO_DATE_VALUE);
                                 return dp;
                             }));
                             return i;
                         }),
                         input(i -> {
-                            i.blockId("add_todo_time");
+                            i.blockId(ADD_TODO_TIME_BLOCK);
                             i.label(plainText(t -> t.text("시간")));
                             i.element(timePicker(tp -> {
                                 tp.placeholder(plainText(t -> t.text("Select a time")));
-                                tp.actionId("time_value");
+                                tp.actionId(ADD_TODO_TIME_VALUE);
                                 return tp;
                             }));
                             return i;

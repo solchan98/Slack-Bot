@@ -1,13 +1,14 @@
-package src.router;
+package src.event;
 
 import com.slack.api.bolt.App;
 import src.component.ChatPostMessage;
 import src.dto.AddTodo;
 
+import static src.common.IdList.*;
+
 public class ViewSubmissionEvent implements Event {
 
     private static final ViewSubmissionEvent INSTANCE = new ViewSubmissionEvent();
-    private static final String CALL_BACK_ADD_TODO = "callback_add_todo";
 
     private ViewSubmissionEvent() {}
 
@@ -21,12 +22,12 @@ public class ViewSubmissionEvent implements Event {
     }
 
     private void addTodoViewSub(App app) {
-        app.viewSubmission(CALL_BACK_ADD_TODO, (req, ctx) -> {
+        app.viewSubmission(ADD_TODO_CALLBACK_ID, (req, ctx) -> {
             var user = req.getPayload().getUser().getId();
             var state = req.getPayload().getView().getState();
-            var todo = state.getValues().get("add_todo_text").get("todo_value").getValue();
-            var date = state.getValues().get("add_todo_date").get("date_value").getSelectedDate();
-            var time = state.getValues().get("add_todo_time").get("time_value").getSelectedTime();
+            var todo = state.getValues().get(ADD_TODO_TEXT_BLOCK).get(ADD_TODO_TEXT_VALUE).getValue();
+            var date = state.getValues().get(ADD_TODO_DATE_BLOCK).get(ADD_TODO_DATE_VALUE).getSelectedDate();
+            var time = state.getValues().get(ADD_TODO_TIME_BLOCK).get(ADD_TODO_TIME_VALUE).getSelectedTime();
             try {
                 AddTodo addTodo = AddTodo.of(todo, date, time);
                 /* todo request server to add data(addTodo)

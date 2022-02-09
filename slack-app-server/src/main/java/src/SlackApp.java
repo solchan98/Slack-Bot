@@ -3,10 +3,10 @@ package src;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
-import src.router.BlockActionEvent;
-import src.router.Event;
-import src.router.MessageEvent;
-import src.router.ViewSubmissionEvent;
+import src.event.BlockActionEvent;
+import src.event.Event;
+import src.event.MessageEvent;
+import src.event.ViewSubmissionEvent;
 
 import java.util.List;
 

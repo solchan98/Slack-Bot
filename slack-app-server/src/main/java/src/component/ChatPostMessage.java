@@ -8,6 +8,8 @@ import com.slack.api.model.block.element.ButtonElement;
 
 import java.util.List;
 
+import static src.common.IdList.*;
+
 public class ChatPostMessage {
 
     private ChatPostMessage() {}
@@ -19,7 +21,7 @@ public class ChatPostMessage {
                 .blocks(
                         List.of(
                                 SectionBlock.builder().text(MarkdownTextObject.builder().text("할일과 알림을 추가하세요!").build())
-                                        .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("할일 추가").build()).actionId("add_btn").build()).build(),
+                                        .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("할일 추가").build()).actionId(ADD_TODO_BTN).build()).build(),
                                 SectionBlock.builder().text(MarkdownTextObject.builder().text("할일과 알림을 조회하세요!").build())
                                         .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("할일 조회").build()).actionId("add_btn").build()).build(),
                                 SectionBlock.builder().text(MarkdownTextObject.builder().text("주 리포트 확인하기!").build())

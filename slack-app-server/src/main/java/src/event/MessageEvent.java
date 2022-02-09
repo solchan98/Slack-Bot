@@ -1,4 +1,4 @@
-package src.router;
+package src.event;
 
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.context.builtin.EventContext;
