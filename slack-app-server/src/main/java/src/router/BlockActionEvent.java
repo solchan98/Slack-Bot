@@ -15,10 +15,10 @@ public class BlockActionEvent implements Event {
 
     @Override
     public void setAppEvent(App app) {
-        this.addBlockAction(app);
+        this.addTodoBlockAction(app);
     }
 
-    private void addBlockAction(App app) {
+    private void addTodoBlockAction(App app) {
         app.blockAction("add_todo", (req, ctx) -> {
             var response = ctx.client().viewsOpen(v -> v
                     .triggerId(req.getPayload().getTriggerId())

@@ -37,4 +37,13 @@ public class ChatPostMessage {
                                 SectionBlock.builder().text(MarkdownTextObject.builder().text("Hello, <@" + username + ">").build()).build()
                         )).build();
     }
+    public static ChatPostMessageRequest basicMessage(String username, String message) {
+        return ChatPostMessageRequest.builder()
+                .channel(username)
+                .text("알림 도착!")
+                .blocks(
+                        List.of(
+                                SectionBlock.builder().text(MarkdownTextObject.builder().text(message).build()).build()
+                        )).build();
+    }
 }
