@@ -17,6 +17,7 @@ dependencies {
     implementation 'org.slf4j:slf4j-simple:1.7.35'
 
     implementation 'com.slack.api:bolt-jetty:1.18.0'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
 }
 
 test {
