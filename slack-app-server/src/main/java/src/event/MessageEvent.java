@@ -27,13 +27,13 @@ public class MessageEvent {
         });
     }
 
-    private void hello(com.slack.api.model.event.MessageEvent event, EventContext ctx) throws SlackApiException, IOException {
+    private static void hello(com.slack.api.model.event.MessageEvent event, EventContext ctx) throws SlackApiException, IOException {
         String user = event.getUser();
 //        String channel = event.getChannel();
         ctx.client().chatPostMessage(ChatPostMessage.getSayHello(user, user));
     }
 
-    private void command(com.slack.api.model.event.MessageEvent event, EventContext ctx) throws SlackApiException, IOException {
+    private static void command(com.slack.api.model.event.MessageEvent event, EventContext ctx) throws SlackApiException, IOException {
         String user = event.getUser();
         ctx.client().chatPostMessage(ChatPostMessage.commandList(user));
     }
