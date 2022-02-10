@@ -1,6 +1,7 @@
 package src.event;
 
 import com.slack.api.bolt.App;
+import src.common.Container;
 import src.component.ModalView;
 
 import static src.common.IdList.ADD_TODO_BTN;
@@ -11,8 +12,8 @@ public class BlockActionEvent implements Event {
 
     private BlockActionEvent() {}
 
-    public static Event getInstance() {
-        return INSTANCE;
+    public static void init() {
+        Container.setBlockEvent(INSTANCE);
     }
 
     @Override

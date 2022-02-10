@@ -3,10 +3,8 @@ package src;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.AppConfig;
 import com.slack.api.bolt.jetty.SlackAppServer;
-import src.event.BlockActionEvent;
+import src.common.Container;
 import src.event.Event;
-import src.event.MessageEvent;
-import src.event.ViewSubmissionEvent;
 
 import java.util.List;
 
@@ -17,9 +15,9 @@ public class SlackApp {
     private static final SlackApp INSTANCE = new SlackApp();
 
     private static final List<Event> eventList = List.of(
-            MessageEvent.getInstance(),
-            BlockActionEvent.getInstance(),
-            ViewSubmissionEvent.getInstance());
+            Container.getMessageEvent(),
+            Container.getBlockEvent(),
+            Container.getViewSubmit());
 
     // todo env
     private static final String SINGLE_TOKEN = "";
@@ -32,7 +30,7 @@ public class SlackApp {
         slackAppServer = new SlackAppServer(app);
     }
 
-    // init routers
+    // init events
     static {
         eventList.forEach(event -> event.setAppEvent(app));
     }

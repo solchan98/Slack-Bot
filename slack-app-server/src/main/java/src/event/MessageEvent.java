@@ -3,6 +3,7 @@ package src.event;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.context.builtin.EventContext;
 import com.slack.api.methods.SlackApiException;
+import src.common.Container;
 import src.component.ChatPostMessage;
 import src.component.Message;
 
@@ -17,8 +18,8 @@ public class MessageEvent implements Event {
 
     private MessageEvent() {}
 
-    public static Event getInstance() {
-        return INSTANCE;
+    public static void init() {
+        Container.setMessageEvent(INSTANCE);
     }
 
     public void setAppEvent(App app) {

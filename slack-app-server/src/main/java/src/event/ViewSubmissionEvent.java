@@ -16,9 +16,10 @@ public class ViewSubmissionEvent implements Event {
 
     private ViewSubmissionEvent() {}
 
-    public static Event getInstance() {
-        return INSTANCE;
+    public static void init() {
+        Container.setViewSubmit(INSTANCE);
     }
+
     private final static HttpTemplate httpTemplate = Container.getHttpTemplate();
     private final static ObjectMapper objectMapper = Container.getObjectInstance();
 
