@@ -4,37 +4,45 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-public class AddTodo {
-    private final String todo;
-    private final LocalDateTime dateTime;
+import static src.common.Content.TIME_INVALID;
 
-    private AddTodo(String todo, LocalDateTime dateTime) {
-        this.todo = todo;
+public class AddTodo {
+    private final String userId;
+    private final String content;
+    private final String dateTime;
+
+    private AddTodo(String userId, String content, String dateTime) {
+        this.userId = userId;
+        this.content = content;
         this.dateTime = dateTime;
     }
 
-    public static AddTodo of(String todo, String dateStr, String timeStr) throws RuntimeException {
+    public static AddTodo of(String userId, String content, String dateStr, String timeStr) throws RuntimeException {
         LocalDate date = LocalDate.parse(dateStr);
         LocalTime time = LocalTime.parse(timeStr);
         LocalDateTime dateTime = LocalDateTime.of(date, time);
         if(dateTime.isBefore(LocalDateTime.now())) {
-            throw new RuntimeException("현재보다 이전으로 예약은 불가능합니다.");
+            throw new RuntimeException(TIME_INVALID);
         }
-        return new AddTodo(todo, dateTime);
+        return new AddTodo(userId, content, dateTime.toString());
     }
 
-    public String getTodo() {
-        return todo;
+    public String getContent() {
+        return content;
     }
 
-    public LocalDateTime getDateTime() {
+    public String getDateTime() {
         return dateTime;
+    }
+
+    public String getUserId() {
+        return userId;
     }
 
     @Override
     public String toString() {
         return "AddTodo{" +
-                "todo='" + todo + '\'' +
+                "content='" + content + '\'' +
                 ", dateTime=" + dateTime +
                 '}';
     }

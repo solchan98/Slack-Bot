@@ -14,7 +14,6 @@ public enum Message {
         for(Message value: values) {
             pattern += value.name().toLowerCase() + "|";
         }
-        System.out.println(pattern.substring(0, pattern.length() - 1));
         pattern = pattern.substring(0, pattern.length() - 1);
         return Pattern.compile(pattern);
     }

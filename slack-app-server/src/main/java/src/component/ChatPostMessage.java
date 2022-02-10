@@ -8,6 +8,7 @@ import com.slack.api.model.block.element.ButtonElement;
 
 import java.util.List;
 
+import static src.common.Content.*;
 import static src.common.IdList.*;
 
 public class ChatPostMessage {
@@ -17,14 +18,14 @@ public class ChatPostMessage {
     public static ChatPostMessageRequest commandList(String username) {
         return ChatPostMessageRequest.builder()
                 .channel(username)
-                .text("🎮 커맨드가 도착했어요!")
+                .text(COMMAND_INCOMING)
                 .blocks(
                         List.of(
-                                SectionBlock.builder().text(MarkdownTextObject.builder().text("할일과 알림을 추가하세요!").build())
+                                SectionBlock.builder().text(MarkdownTextObject.builder().text(ADD_TODO_MSG).build())
                                         .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("할일 추가").build()).actionId(ADD_TODO_BTN).build()).build(),
-                                SectionBlock.builder().text(MarkdownTextObject.builder().text("할일과 알림을 조회하세요!").build())
+                                SectionBlock.builder().text(MarkdownTextObject.builder().text(GET_TODO_MSG).build())
                                         .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("할일 조회").build()).actionId("add_btn").build()).build(),
-                                SectionBlock.builder().text(MarkdownTextObject.builder().text("주 리포트 확인하기!").build())
+                                SectionBlock.builder().text(MarkdownTextObject.builder().text(GET_WEEK_REPORT).build())
                                         .accessory(ButtonElement.builder().text(PlainTextObject.builder().text("리포트 조회").build()).actionId("add_btn").build()).build()
                         )
                 ).build();
@@ -42,7 +43,7 @@ public class ChatPostMessage {
     public static ChatPostMessageRequest basicMessage(String username, String message) {
         return ChatPostMessageRequest.builder()
                 .channel(username)
-                .text("알림 도착!")
+                .text(NOTIFICATION_INCOMING)
                 .blocks(
                         List.of(
                                 SectionBlock.builder().text(MarkdownTextObject.builder().text(message).build()).build()

@@ -6,6 +6,8 @@ import static com.slack.api.model.block.Blocks.*;
 import static com.slack.api.model.block.composition.BlockCompositions.*;
 import static com.slack.api.model.block.element.BlockElements.*;
 import static com.slack.api.model.view.Views.*;
+import static src.common.Content.MODAL_ADD_TODO_MSG;
+import static src.common.Content.MODAL_TITLE;
 import static src.common.IdList.*;
 
 public class ModalView {
@@ -16,9 +18,9 @@ public class ModalView {
     public static final View ADD_TODO = view(v -> v
                 .type(MODAL_TYPE)
                 .callbackId(ADD_TODO_CALLBACK_ID)
-                .title(viewTitle(vt -> vt.type(PLAIN_TEXT).text("할일 매니저")))
+                .title(viewTitle(vt -> vt.type(PLAIN_TEXT).text(MODAL_TITLE)))
                 .blocks(asBlocks(
-                        section(s -> s.text(markdownText(mt -> mt.text("할일과 알림받을 시간을 설정하세요.")))),
+                        section(s -> s.text(markdownText(mt -> mt.text(MODAL_ADD_TODO_MSG)))),
                         input(i -> {
                             i.blockId(ADD_TODO_TEXT_BLOCK);
                             i.label(plainText(t -> t.text("할일")));
