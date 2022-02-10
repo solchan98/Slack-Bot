@@ -12,7 +12,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = HttpException.class)
     public ResponseEntity<Message> handle(HttpException e){
         Message message = Message.builder().status(HttpStatus.BAD_REQUEST).message(e.getMessage()).build();
-        System.out.println("ASDasdasda");
         return ResponseEntity.status(e.getStatus()).body(message);
     }
 }
