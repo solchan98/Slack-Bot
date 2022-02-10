@@ -16,8 +16,8 @@ public class HttpTemplate {
 
     private HttpTemplate() {}
 
-    public static void init() {
-        Container.setHttpTemplate(INSTANCE);
+    public static HttpTemplate getInstance() {
+        return INSTANCE;
     }
 
     public void sendPostByJson(String url, String json) {

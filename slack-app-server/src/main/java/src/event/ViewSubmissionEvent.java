@@ -2,7 +2,6 @@ package src.event;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slack.api.bolt.App;
-import src.common.Container;
 import src.common.HttpTemplate;
 import src.component.ChatPostMessage;
 import src.dto.AddTodo;
@@ -10,25 +9,18 @@ import src.dto.AddTodo;
 import static src.common.IdList.*;
 import static src.common.UrlList.URL_ADD_TODO;
 
-public class ViewSubmissionEvent implements Event {
-
-    private static final ViewSubmissionEvent INSTANCE = new ViewSubmissionEvent();
+public class ViewSubmissionEvent {
 
     private ViewSubmissionEvent() {}
 
-    public static void init() {
-        Container.setViewSubmit(INSTANCE);
+    private final static HttpTemplate httpTemplate = HttpTemplate.getInstance();
+    private final static ObjectMapper objectMapper = new ObjectMapper();
+
+    public static void setAppEvent(App app) {
+        addTodoViewSub(app);
     }
 
-    private final static HttpTemplate httpTemplate = Container.getHttpTemplate();
-    private final static ObjectMapper objectMapper = Container.getObjectInstance();
-
-    @Override
-    public void setAppEvent(App app) {
-        this.addTodoViewSub(app);
-    }
-
-    private void addTodoViewSub(App app) {
+    private static void addTodoViewSub(App app) {
         app.viewSubmission(ADD_TODO_CALLBACK_ID, (req, ctx) -> {
             var user = req.getPayload().getUser().getId();
             var state = req.getPayload().getView().getState();

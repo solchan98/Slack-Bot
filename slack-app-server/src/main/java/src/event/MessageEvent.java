@@ -3,7 +3,6 @@ package src.event;
 import com.slack.api.bolt.App;
 import com.slack.api.bolt.context.builtin.EventContext;
 import com.slack.api.methods.SlackApiException;
-import src.common.Container;
 import src.component.ChatPostMessage;
 import src.component.Message;
 
@@ -11,23 +10,16 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.regex.Pattern;
 
-public class MessageEvent implements Event {
-    private static final MessageEvent INSTANCE = new MessageEvent();
-    private static final Class<? extends MessageEvent> aClass = INSTANCE.getClass();
+public class MessageEvent {
     private static final Pattern pattern = Message.getMessagePattern();
-
     private MessageEvent() {}
 
-    public static void init() {
-        Container.setMessageEvent(INSTANCE);
-    }
-
-    public void setAppEvent(App app) {
+    public static void setAppEvent(App app) {
         app.message(pattern, (payload, ctx) -> {
             String text = payload.getEvent().getText();
             try {
-                Method method = MessageEvent.aClass.getDeclaredMethod(text, com.slack.api.model.event.MessageEvent.class, EventContext.class);
-                method.invoke(this, payload.getEvent(), ctx);
+                Method method = MessageEvent.class.getDeclaredMethod(text, com.slack.api.model.event.MessageEvent.class, EventContext.class);
+                method.invoke(MessageEvent.class, payload.getEvent(), ctx);
             } catch (Exception e) {
                 e.printStackTrace();
             }
