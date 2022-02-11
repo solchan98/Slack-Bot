@@ -33,6 +33,10 @@ public class Todo implements Comparable<Todo> {
         return new Todo(userId, content, dateTime);
     }
 
+    public void performTodo() {
+        this.isDone = true;
+    }
+
     @Override
     public String toString() {
         return "Todo{" +
