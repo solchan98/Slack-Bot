@@ -37,6 +37,8 @@ dependencies {
 
     implementation 'com.h2database:h2'
     implementation group: 'com.slack.api', name: 'bolt', version: '1.18.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.slack.api:bolt-servlet:1.20.0'
     implementation 'com.google.code.gson:gson:2.8.9'
 
     // [QueryDSL]
