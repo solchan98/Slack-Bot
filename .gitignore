@@ -1,5 +1,4 @@
-/slack-app-server/build
-/slack-app-server/.idea
-/slack-app-server/.gradle
-/.gradle
+/build
 /.idea
+/.gradle
+/src/main/resources
