@@ -22,9 +22,14 @@ public class ViewSubmissionEvent {
             var content = state.getValues().get(ADD_TODO_TEXT_BLOCK).get(ADD_TODO_TEXT_VALUE).getValue();
             var date = state.getValues().get(ADD_TODO_DATE_BLOCK).get(ADD_TODO_DATE_VALUE).getSelectedDate();
             var time = state.getValues().get(ADD_TODO_TIME_BLOCK).get(ADD_TODO_TIME_VALUE).getSelectedTime();
-            AddTodo addTodo = AddTodo.of(user, content, date, time);
-            todoService.createTodo(addTodo);
-            var message = "요청 성공☀️ " + date + " " + time + "으로 등록되었습니다!";
+            var message = "";
+            try {
+                AddTodo addTodo = AddTodo.of(user, content, date, time);
+                todoService.createTodo(addTodo);
+                message = "요청 성공☀️ " + date + " " + time + "으로 등록되었습니다!";
+            } catch (RuntimeException e) {
+                message = "요청 실패! " + e.getMessage();
+            }
             ctx.client().chatPostMessage(ChatPostMessage.basicMessage(user, message));
             return ctx.ack();
         });

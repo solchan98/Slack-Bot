@@ -42,7 +42,7 @@ public class TodoService {
     private void checkDateTimeIsValid(LocalDateTime dateTime) {
         LocalDateTime now = LocalDateTime.now();
         if(dateTime.isBefore(now)) {
-            throw new HttpException(HttpStatus.BAD_REQUEST, TODO_INVALID_BEFORE_NOW);
+            throw new RuntimeException(TODO_INVALID_BEFORE_NOW);
         }
     }
 
